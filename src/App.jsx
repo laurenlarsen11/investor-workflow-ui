@@ -12,29 +12,34 @@ function App() {
   }, []);
 
 
-  const handleAirtableSubmit = async (formData) => {
-    const res = await fetch('https://api.airtable.com/v0/appV5AzCASIk3QV6z/Investor%20Submissions', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_TOKEN}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        fields: {
-          "Startup Interested In": formData.startup,
-          "Name": formData.name,
-          "Email": formData.email,
-          "Investment Amount": formData.investmentAmount,
-          "Experience": formData.experience,
-          "Strategic Interest": formData.strategicValue,
-          "Notes": formData.notes,
-        }
-      }),
-    });
-
+  async function handleAirtableSubmit(formData) {
+    const res = await fetch(
+      `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Investor%20Interest`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_TOKEN}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fields: {
+            "Name": formData.name,
+            "Email": formData.email,
+            "Startup": formData.startup,
+            "Investment Amount": formData.investmentAmount,
+            "Experience": formData.experience,
+            "Strategic Value": formData.strategicValue,
+            "Additional Notes": formData.notes,
+          }
+        }),
+      }
+    );
+  
     const data = await res.json();
-    console.log('✅ Submitted to Airtable:', data);
-  };
+    console.log("✅ Submitted to Airtable:", data);
+  }
+  
+  
 
   return (
     <div style={{ padding: '2rem' }}>
