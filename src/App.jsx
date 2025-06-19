@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { fetchStartups } from './data/fetchStartups';
 import InterestForm from './components/InterestForm';
 import './App.css';
 
@@ -8,14 +7,31 @@ function App() {
   const [selectedStartup, setSelectedStartup] = useState(null);
 
   useEffect(() => {
-    fetchStartups().then(setStartups);
+    async function fetchStartups() {
+      const res = await fetch('https://api.airtable.com/v0/appV5AzCASIk3QV6z/Startups', {
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_TOKEN}`
+        }
+      });
+
+      const data = await res.json();
+      const formatted = data.records.map((record) => ({
+        id: record.id,
+        name: record.fields['Startup Name'],
+        pitchDeck: record.fields['Pitch Deck'],
+        investmentMemo: record.fields['Investment Memo'],
+        dataroom: record.fields['Dataroom'],
+      }));
+
+      setStartups(formatted);
+    }
+
+    fetchStartups();
   }, []);
 
-
-  async function handleAirtableSubmit(formData) {
-    const res = await fetch(
-      `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/Investor%20Interest`,
-      {
+  const handleAirtableSubmit = async (formData) => {
+    try {
+      const res = await fetch('https://api.airtable.com/v0/appV5AzCASIk3QV6z/Investor%20Interest', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_TOKEN}`,
@@ -23,23 +39,23 @@ function App() {
         },
         body: JSON.stringify({
           fields: {
-            "Name": formData.name,
+            "Investor name": formData.name,
             "Email": formData.email,
-            "Startup": formData.startup,
+            "Startup Interested In": formData.startup,
             "Investment Amount": formData.investmentAmount,
-            "Experience": formData.experience,
-            "Strategic Value": formData.strategicValue,
+            "Investment Experience": formData.experience,
+            "Strategic Value & Fit": formData.strategicValue,
             "Additional Notes": formData.notes,
           }
         }),
-      }
-    );
-  
-    const data = await res.json();
-    console.log("✅ Submitted to Airtable:", data);
-  }
-  
-  
+      });
+
+      const data = await res.json();
+      console.log("✅ Submitted to Airtable:", data);
+    } catch (error) {
+      console.error("❌ Airtable submission failed:", error);
+    }
+  };
 
   return (
     <div style={{ padding: '2rem' }}>
@@ -47,7 +63,7 @@ function App() {
       <p>Select a startup to view its materials and express interest.</p>
       <div style={{ display: 'grid', gap: '1rem' }}>
         {startups.map((startup) => (
-          <div key={startup.name} style={{ border: '1px solid #ccc', padding: '1rem', borderRadius: '8px' }}>
+          <div key={startup.id} style={{ border: '1px solid #ccc', padding: '1rem', borderRadius: '8px' }}>
             <h2>{startup.name}</h2>
             {startup.pitchDeck && <a href={startup.pitchDeck} target="_blank" rel="noopener noreferrer">📄 Pitch Deck</a>}<br />
             {startup.investmentMemo && <a href={startup.investmentMemo} target="_blank" rel="noopener noreferrer">📝 Investment Memo</a>}<br />
@@ -70,6 +86,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
