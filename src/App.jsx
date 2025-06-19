@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
-import { startups } from './data/startups';
+import React, { useEffect, useState } from 'react';
+import { fetchStartups } from './data/fetchStartups';
 import InterestForm from './components/InterestForm';
 import './App.css';
 
 function App() {
+  const [startups, setStartups] = useState([]);
   const [selectedStartup, setSelectedStartup] = useState(null);
+
+  useEffect(() => {
+    fetchStartups().then(setStartups);
+  }, []);
+
 
   const handleAirtableSubmit = async (formData) => {
     const res = await fetch('https://api.airtable.com/v0/appV5AzCASIk3QV6z/Investor%20Submissions', {
