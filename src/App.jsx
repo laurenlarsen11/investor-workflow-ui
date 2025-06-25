@@ -122,13 +122,24 @@ function App() {
 </div>
 
 
-      {selectedStartup && (
-        <InterestForm
-          startup={selectedStartup}
-          onClose={() => setSelectedStartup(null)}
-          onSubmit={handleAirtableSubmit}
-        />
-      )}
+{selectedStartup && (
+  <div style={{ marginTop: '2rem', background: '#f9f9f9', padding: '1rem', borderRadius: '8px' }}>
+    <p style={{ fontSize: '0.95rem', lineHeight: '1.5' }}>
+      <strong>CivilizationX</strong> is an angel syndicate dedicated to strategically investing in the foundational layers of Artificial Intelligence. We are a collective of forward-thinking individuals united by a shared vision: to propel civilization beyond its current technological horizons by fostering groundbreaking innovations in Hardware, Data, Machine Learning Operations, Cloud Infrastructure, and Foundational Models.
+      <br /><br />
+      As you review the pitch decks and investment memorandums for these four promising AI infrastructure startups, we encourage you to indicate your interest in investing in any or all of them, with a minimum investment of £5,000 per startup. At this stage, we are gathering soft commitments or indications of interest. This will help the syndicate and the individual startups gauge the level of funding interest and plan accordingly for the next steps, which will involve more detailed due diligence and the formal investment agreements.
+      <br /><br />
+      By submitting this form, you acknowledge and consent to the collection and use of your personal data, as included in your submission. We assure you that your data will be handled in compliance with GDPR regulations, ensuring privacy and security. You also agree to CivilizationX contacting you regarding this submission and future opportunities related to your interests in our community. Your personal data will not be shared with third parties without your explicit consent. For more information or to exercise your GDPR rights, please contact us at <a href="mailto:team@civilizationx.co.uk">team@civilizationx.co.uk</a>.
+    </p>
+
+    <InterestForm
+      startup={selectedStartup}
+      onClose={() => setSelectedStartup(null)}
+      onSubmit={handleAirtableSubmit}
+    />
+  </div>
+)}
+
     </div>
   );
 }
