@@ -30,49 +30,88 @@ function App() {
   }, []);
 
   const handleAirtableSubmit = async (formData) => {
+    console.log("📤 Submitting this data to Airtable:", formData);
+  
     try {
-      const res = await fetch('https://api.airtable.com/v0/appV5AzCASIk3QV6z/Investor%20Interest', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_TOKEN}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          fields: {
-            "Investor name": formData.name,
-            "Email": formData.email,
-            "Startup Interested In": formData.startup,
-            "Investment Amount": formData.investmentAmount,
-            "Investment Experience": formData.experience,
-            "Strategic Value & Fit": formData.strategicValue,
-            "Additional Notes": formData.notes,
-          }
-        }),
-      });
-
-      const data = await res.json();
-      console.log("✅ Submitted to Airtable:", data);
+      const res = await fetch(
+        'https://api.airtable.com/v0/appV5AzCASIk3QV6z/Investor%20Interest',
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_TOKEN}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            fields: {
+              "Investor name": formData.name,
+              "Email": formData.email,
+              "Startup Interested In": formData.startup,
+              "Investment Amount": formData.investmentAmount,
+              "Investment Experience": formData.experience,
+              "Strategic Value & Fit": formData.strategicValue,
+              "Additional Notes": formData.notes,
+            },
+          }),
+        }
+      );
+  
+      const responseText = await res.text();
+      console.log("📨 Airtable raw response:", responseText);
+  
+      if (!res.ok) {
+        console.error("❌ Submission failed:", responseText);
+      }
     } catch (error) {
-      console.error("❌ Airtable submission failed:", error);
+      console.error("❌ Network error:", error);
     }
   };
+  
 
   return (
     <div style={{ padding: '2rem' }}>
       <h1>Investor Workflow</h1>
       <p>Select a startup to view its materials and express interest.</p>
-      <div style={{ display: 'grid', gap: '1rem' }}>
-        {startups.map((startup) => (
-          <div key={startup.id} style={{ border: '1px solid #ccc', padding: '1rem', borderRadius: '8px' }}>
-            <h2>{startup.name}</h2>
-            {startup.pitchDeck && <a href={startup.pitchDeck} target="_blank" rel="noopener noreferrer">📄 Pitch Deck</a>}<br />
-            {startup.investmentMemo && <a href={startup.investmentMemo} target="_blank" rel="noopener noreferrer">📝 Investment Memo</a>}<br />
-            {startup.dataroom && <a href={startup.dataroom} target="_blank" rel="noopener noreferrer">📁 Dataroom</a>}<br />
-            <br />
-            <button onClick={() => setSelectedStartup(startup.name)}>Express Interest</button>
-          </div>
-        ))}
-      </div>
+      <div
+  style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+    gap: '1.5rem',
+    marginTop: '2rem',
+  }}
+>
+  {startups.map((startup) => (
+    <div
+      key={startup.id}
+      style={{
+        border: '1px solid #ccc',
+        padding: '1rem',
+        borderRadius: '8px',
+        backgroundColor: '#fff',
+        boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+      }}
+    >
+      <h2>{startup.name}</h2>
+      {startup.pitchDeck && (
+        <a href={startup.pitchDeck} target="_blank" rel="noopener noreferrer">
+          📄 Pitch Deck
+        </a>
+      )}<br />
+      {startup.investmentMemo && (
+        <a href={startup.investmentMemo} target="_blank" rel="noopener noreferrer">
+          📝 Investment Memo
+        </a>
+      )}<br />
+      {startup.dataroom && (
+        <a href={startup.dataroom} target="_blank" rel="noopener noreferrer">
+          📁 Dataroom
+        </a>
+      )}<br />
+      <br />
+      <button onClick={() => setSelectedStartup(startup.name)}>Express Interest</button>
+    </div>
+  ))}
+</div>
+
 
       {selectedStartup && (
         <InterestForm
