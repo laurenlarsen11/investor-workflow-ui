@@ -74,8 +74,8 @@ function App() {
       <div
   style={{
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-    gap: '1.5rem',
+    gridTemplateColumns: 'repeat(3, 1fr)',
+    gap: '2rem',
     marginTop: '2rem',
   }}
 >
@@ -85,29 +85,38 @@ function App() {
       style={{
         border: '1px solid #ccc',
         padding: '1rem',
-        borderRadius: '8px',
+        borderRadius: '12px',
         backgroundColor: '#fff',
-        boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+        boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)',
+        textAlign: 'left',
       }}
     >
-      <h2>{startup.name}</h2>
+      <h2 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', color: '#222' }}>{startup.name}</h2>
+
       {startup.pitchDeck && (
-        <a href={startup.pitchDeck} target="_blank" rel="noopener noreferrer">
-          📄 Pitch Deck
-        </a>
-      )}<br />
+        <div><a href={startup.pitchDeck} target="_blank" rel="noopener noreferrer">📄 Pitch Deck</a></div>
+      )}
       {startup.investmentMemo && (
-        <a href={startup.investmentMemo} target="_blank" rel="noopener noreferrer">
-          📝 Investment Memo
-        </a>
-      )}<br />
+        <div><a href={startup.investmentMemo} target="_blank" rel="noopener noreferrer">📝 Investment Memo</a></div>
+      )}
       {startup.dataroom && (
-        <a href={startup.dataroom} target="_blank" rel="noopener noreferrer">
-          📁 Dataroom
-        </a>
-      )}<br />
-      <br />
-      <button onClick={() => setSelectedStartup(startup.name)}>Express Interest</button>
+        <div><a href={startup.dataroom} target="_blank" rel="noopener noreferrer">📁 Dataroom</a></div>
+      )}
+
+      <button
+        onClick={() => setSelectedStartup(startup.name)}
+        style={{
+          marginTop: '1rem',
+          padding: '0.5rem 1rem',
+          border: 'none',
+          borderRadius: '6px',
+          backgroundColor: '#111',
+          color: '#fff',
+          cursor: 'pointer',
+        }}
+      >
+        Express Interest
+      </button>
     </div>
   ))}
 </div>
