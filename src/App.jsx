@@ -38,7 +38,7 @@ function App() {
         {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_TOKEN}`,
+            Authorization: `Bearer ${import.meta.env.pat0Adp66G42oqoJ0.5499bab8639322adab61c16f50af58150914cef2da5ba6ae90d4918912a0525f}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
@@ -46,7 +46,7 @@ function App() {
               "Investor name": formData.name,
               "Email": formData.email,
               "Startup Interested In": formData.startup,
-              "Investment Amount": formData.investmentAmount,
+              "Investment Amount ($)": formData.investmentAmount,
               "Investment Experience": formData.experience,
               "Strategic Value & Fit": formData.strategicValue,
               "Additional Notes": formData.notes,
