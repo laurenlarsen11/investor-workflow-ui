@@ -38,7 +38,7 @@ function App() {
         {
           method: 'POST',
           headers: {
-            Authorization: `Bearer ${import.meta.env.pat0Adp66G42oqoJ0.5499bab8639322adab61c16f50af58150914cef2da5ba6ae90d4918912a0525f}`,
+            Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_TOKEN}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
