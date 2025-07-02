@@ -21,7 +21,6 @@ function App() {
         description: record.fields['Description'], 
         pitchDeck: record.fields['Pitch Deck'],
         investmentMemo: record.fields['Investment Memo'],
-        dataroom: record.fields['Dataroom'],
       }));
 
       setStartups(formatted);
@@ -86,6 +85,7 @@ function App() {
         <p><strong>CivilizationX</strong> is an angel syndicate dedicated to strategically investing in the foundational layers of Artificial Intelligence. We are a collective of forward-thinking individuals united by a shared vision: to propel civilization beyond its current technological horizons by fostering groundbreaking innovations in Hardware, Data, Machine Learning Operations, Cloud Infrastructure, and Foundational Models.</p>
         <p>As you review the pitch decks and investment memorandums for these four promising AI infrastructure startups, we encourage you to indicate your interest in investing in any or all of them, with a minimum investment of £5,000 per startup. At this stage, we are gathering soft commitments or indications of interest. This will help the syndicate and the individual startups gauge the level of funding interest and plan accordingly for the next steps, which will involve more detailed due diligence and the formal investment agreements.</p>
         <p>By submitting this form, you acknowledge and consent to the collection and use of your personal data, as included in your submission. We assure you that your data will be handled in compliance with GDPR regulations, ensuring privacy and security. You also agree to CivilizationX contacting you regarding this submission and future opportunities related to your interests in our community. Your personal data will not be shared with third parties without your explicit consent. For more information or to exercise your GDPR rights, please contact us at <a href="mailto:team@civilizationx.co.uk">team@civilizationx.co.uk</a>.</p>
+        <p>The Dataroom for each startup is available upon request - please indicate in the 'Additional Notes' section of the interest form if you are interested in viewing it.</p>
       </div>
   
       {/* ✅ Startup grid below */}
@@ -121,9 +121,6 @@ function App() {
             )}
             {startup.investmentMemo && (
               <div><a href={startup.investmentMemo} target="_blank" rel="noopener noreferrer">📝 Investment Memo</a></div>
-            )}
-            {startup.dataroom && (
-              <div><a href={startup.dataroom} target="_blank" rel="noopener noreferrer">📁 Dataroom</a></div>
             )}
   
             <button
