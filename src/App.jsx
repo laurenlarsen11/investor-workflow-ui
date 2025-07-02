@@ -18,6 +18,7 @@ function App() {
       const formatted = data.records.map((record) => ({
         id: record.id,
         name: record.fields['Startup Name'],
+        description: record.fields['Description'], 
         pitchDeck: record.fields['Pitch Deck'],
         investmentMemo: record.fields['Investment Memo'],
         dataroom: record.fields['Dataroom'],
@@ -69,7 +70,7 @@ function App() {
 
   return (
     <div style={{ padding: '2rem' }}>
-      <h1>Investor Workflow</h1>
+      <h1>Startup Interest Form</h1>
       <p>Select a startup to view its materials and express interest.</p>
   
       {/* ✅ Disclaimer is now ABOVE the grid */}
@@ -110,6 +111,11 @@ function App() {
           >
             <h2 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', color: '#222' }}>{startup.name}</h2>
   
+            {startup.description && (
+              <p style={{ marginBottom: '0.75rem', color: '#555', fontSize: '0.95rem' }}>
+              {startup.description}
+              </p>
+            )}
             {startup.pitchDeck && (
               <div><a href={startup.pitchDeck} target="_blank" rel="noopener noreferrer">📄 Pitch Deck</a></div>
             )}
