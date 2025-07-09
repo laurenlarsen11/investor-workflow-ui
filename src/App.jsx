@@ -19,6 +19,7 @@ function App() {
         id: record.id,
         name: record.fields['Startup Name'],
         description: record.fields['Description'], 
+        sector: record.fields['Sector'], 
         pitchDeck: record.fields['Pitch Deck'],
         investmentMemo: record.fields['Investment Memo'],
       }));
@@ -115,6 +116,20 @@ function App() {
               <p style={{ marginBottom: '0.75rem', color: '#555', fontSize: '0.95rem' }}>
               {startup.description}
               </p>
+            )}
+            {startup.sector && (
+              <p style={{
+              backgroundColor: '#e0e7ff',
+              color: '#1e40af',
+              padding: '0.25rem 0.5rem',
+              borderRadius: '12px',
+              display: 'inline-block',
+              fontSize: '0.8rem',
+              fontWeight: '600',
+               marginBottom: '0.75rem',
+            }}>
+              {startup.sector}
+            </p>
             )}
             {startup.pitchDeck && (
               <div><a href={startup.pitchDeck} target="_blank" rel="noopener noreferrer">📄 Pitch Deck</a></div>
