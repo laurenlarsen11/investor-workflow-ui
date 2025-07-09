@@ -117,19 +117,20 @@ function App() {
               {startup.description}
               </p>
             )}
-            {startup.sector && (
-              <p style={{
-              backgroundColor: '#e0e7ff',
-              color: '#1e40af',
-              padding: '0.25rem 0.5rem',
-              borderRadius: '12px',
-              display: 'inline-block',
+            {startup.sector && Array.isArray(startup.sector) && (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
+              {startup.sector.map((tag, index) => (
+              <span key={index} style={{
+              backgroundColor: '#e0e0e0',
+              padding: '0.3rem 0.6rem',
+              borderRadius: '999px',
               fontSize: '0.8rem',
-              fontWeight: '600',
-               marginBottom: '0.75rem',
-            }}>
-              {startup.sector}
-            </p>
+              color: '#333',
+              }}>
+              {tag}
+              </span>
+              ))}
+              </div>
             )}
             {startup.pitchDeck && (
               <div><a href={startup.pitchDeck} target="_blank" rel="noopener noreferrer">📄 Pitch Deck</a></div>
