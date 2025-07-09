@@ -19,7 +19,7 @@ function App() {
         id: record.id,
         name: record.fields['Startup Name'],
         description: record.fields['Description'], 
-        sector: record.fields['Sector'], 
+        sector: record.fields['Sector(s)'], 
         pitchDeck: record.fields['Pitch Deck'],
         investmentMemo: record.fields['Investment Memo'],
       }));
