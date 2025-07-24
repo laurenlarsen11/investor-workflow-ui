@@ -68,79 +68,88 @@ function App() {
     <div style={{
       padding: '2rem',
       minHeight: '100vh',
-      fontFamily: 'var(--font-body)',
+      fontFamily: 'Agrandir, sans-serif',
       background: 'linear-gradient(to bottom, #1869c2, #021d39)',
-      color: '#f3f3f3'
+      color: '#f5f5f5'
     }}>
       <h1 style={{
-        fontFamily: 'var(--font-title)',
+        fontFamily: 'Horizon, sans-serif',
         fontSize: '2.5rem',
         marginBottom: '0.5rem'
       }}>
-        CivilizationX Startup Interest
+        Startup Interest Form
       </h1>
-      <p style={{ maxWidth: '650px' }}>
-        Review decks and express soft commitments on the startups below. Minimum investment is £5,000 per deal.
-      </p>
+      <p>Select a startup to view its materials and express interest.</p>
 
       <div style={{
-        backgroundColor: 'white',
-        color: '#111',
+        fontSize: '0.9rem',
+        lineHeight: '1.6',
+        backgroundColor: '#f7f7f7',
+        color: '#333',
         padding: '1.5rem',
-        borderRadius: '12px',
-        margin: '2rem 0',
-        lineHeight: '1.6'
+        borderRadius: '8px',
+        margin: '1.5rem 0',
       }}>
-        <p><strong>CivilizationX</strong> is an angel syndicate investing in foundational AI infrastructure.</p>
-        <p>Submit interest below to help us gauge soft commitments. Formal due diligence will follow.</p>
-        <p>By submitting, you agree to our GDPR policy and allow us to contact you. Your data will not be shared externally.</p>
-        <p>Email <a href="mailto:team@civilizationx.co.uk">team@civilizationx.co.uk</a> with questions or to request the data room.</p>
+        <p><strong>CivilizationX</strong> is an angel syndicate dedicated to strategically investing in the foundational layers of Artificial Intelligence...</p>
+        <p>We encourage you to indicate your interest in investing in any or all of them, with a minimum investment of £5,000 per startup...</p>
+        <p>By submitting this form, you acknowledge and consent to the collection and use of your personal data... <a href="mailto:team@civilizationx.co.uk">team@civilizationx.co.uk</a>.</p>
+        <p>The Dataroom for each startup is available upon request...</p>
       </div>
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-        gap: '2rem'
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gap: '2rem',
+        marginTop: '2rem'
       }}>
         {startups.map((startup) => (
-          <div
-            key={startup.id}
-            style={{
-              background: '#fff',
-              color: '#111',
-              borderRadius: '12px',
-              padding: '1.5rem',
-              boxShadow: '0 8px 20px rgba(0,0,0,0.1)',
-            }}
-          >
-            <h2 style={{ fontFamily: 'var(--font-title)' }}>{startup.name}</h2>
-            {startup.description && <p style={{ fontSize: '0.95rem' }}>{startup.description}</p>}
+          <div key={startup.id} style={{
+            border: '1px solid #ccc',
+            padding: '1rem',
+            borderRadius: '12px',
+            backgroundColor: '#fff',
+            color: '#000',
+            boxShadow: '0 4px 10px rgba(0,0,0,0.05)'
+          }}>
+            <h2 style={{
+              fontSize: '1.25rem',
+              marginBottom: '0.75rem',
+              fontFamily: 'Horizon, sans-serif'
+            }}>{startup.name}</h2>
+
+            {startup.description && <p style={{ marginBottom: '0.75rem' }}>{startup.description}</p>}
+
             {startup.sector && Array.isArray(startup.sector) && (
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
-                {startup.sector.map((tag, index) => (
-                  <span key={index} style={{
-                    backgroundColor: '#dbeafe',
-                    color: '#1e3a8a',
+              <div style={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: '0.5rem',
+                marginBottom: '0.75rem'
+              }}>
+                {startup.sector.map((tag, i) => (
+                  <span key={i} style={{
+                    backgroundColor: '#e0e0e0',
                     padding: '0.3rem 0.6rem',
                     borderRadius: '999px',
-                    fontSize: '0.75rem'
+                    fontSize: '0.8rem'
                   }}>{tag}</span>
                 ))}
               </div>
             )}
-            {startup.pitchDeck && <p><a href={startup.pitchDeck} target="_blank">📄 Pitch Deck</a></p>}
-            {startup.investmentMemo && <p><a href={startup.investmentMemo} target="_blank">📝 Investment Memo</a></p>}
+
+            {startup.pitchDeck && <div><a href={startup.pitchDeck} target="_blank">📄 Pitch Deck</a></div>}
+            {startup.investmentMemo && <div><a href={startup.investmentMemo} target="_blank">📝 Investment Memo</a></div>}
 
             <button
               onClick={() => setSelectedStartup(startup.name)}
               style={{
                 marginTop: '1rem',
-                background: '#111',
-                color: '#fff',
+                padding: '0.5rem 1rem',
                 border: 'none',
                 borderRadius: '6px',
-                padding: '0.6rem 1.2rem',
-                cursor: 'pointer'
+                backgroundColor: '#111',
+                color: '#fff',
+                cursor: 'pointer',
               }}
             >
               Express Interest
@@ -161,7 +170,6 @@ function App() {
 }
 
 export default App;
-
 
 
 
