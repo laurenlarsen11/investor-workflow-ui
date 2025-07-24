@@ -31,7 +31,7 @@ function App() {
   }, []);
 
   const handleAirtableSubmit = async (formData) => {
-    console.log("\ud83d\udce4 Submitting this data to Airtable:", formData);
+    console.log("📤 Submitting this data to Airtable:", formData);
 
     try {
       const res = await fetch(
@@ -57,13 +57,13 @@ function App() {
       );
 
       const responseText = await res.text();
-      console.log("\ud83d\udce8 Airtable raw response:", responseText);
+      console.log("📨 Airtable raw response:", responseText);
 
       if (!res.ok) {
-        console.error("\u274c Submission failed:", responseText);
+        console.error("❌ Submission failed:", responseText);
       }
     } catch (error) {
-      console.error("\u274c Network error:", error);
+      console.error("❌ Network error:", error);
     }
   };
 
@@ -72,48 +72,52 @@ function App() {
       padding: '2rem', 
       minHeight: '100vh', 
       background: 'linear-gradient(180deg, #000000, #03436a, #07669f)',
-      color: '#f5f5f5'
+      color: '#ffffff',
+      fontFamily: 'system-ui, Avenir, Helvetica, Arial, sans-serif'
     }}>
-      <h1 style={{ color: '#ffffff' }}>Startup Interest Form</h1>
-      <p>Select a startup to view its materials and express interest.</p>
+      <h1 style={{ textAlign: 'center' }}>Startup Interest Form</h1>
+      <p style={{ textAlign: 'center' }}>Select a startup to view its materials and express interest.</p>
 
       <div style={{
         fontSize: '0.9rem',
         lineHeight: '1.6',
-        backgroundColor: 'rgba(255, 255, 255, 0.08)',
-        color: '#ffffff',
+        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+        color: '#e0e0e0',
         padding: '1.5rem',
         borderRadius: '8px',
         margin: '1.5rem 0',
       }}>
         <p><strong>CivilizationX</strong> is an angel syndicate dedicated to strategically investing in the foundational layers of Artificial Intelligence. We are a collective of forward-thinking individuals united by a shared vision: to propel civilization beyond its current technological horizons by fostering groundbreaking innovations in Hardware, Data, Machine Learning Operations, Cloud Infrastructure, and Foundational Models.</p>
         <p>As you review the pitch decks and investment memorandums for these four promising AI infrastructure startups, we encourage you to indicate your interest in investing in any or all of them, with a minimum investment of £5,000 per startup. At this stage, we are gathering soft commitments or indications of interest. This will help the syndicate and the individual startups gauge the level of funding interest and plan accordingly for the next steps, which will involve more detailed due diligence and the formal investment agreements.</p>
-        <p>By submitting this form, you acknowledge and consent to the collection and use of your personal data, as included in your submission. We assure you that your data will be handled in compliance with GDPR regulations, ensuring privacy and security. You also agree to CivilizationX contacting you regarding this submission and future opportunities related to your interests in our community. Your personal data will not be shared with third parties without your explicit consent. For more information or to exercise your GDPR rights, please contact us at <a style={{ color: '#aad8ff' }} href="mailto:team@civilizationx.co.uk">team@civilizationx.co.uk</a>.</p>
+        <p>By submitting this form, you acknowledge and consent to the collection and use of your personal data, as included in your submission. We assure you that your data will be handled in compliance with GDPR regulations, ensuring privacy and security. You also agree to CivilizationX contacting you regarding this submission and future opportunities related to your interests in our community. Your personal data will not be shared with third parties without your explicit consent. For more information or to exercise your GDPR rights, please contact us at <a style={{ color: '#99ccff' }} href="mailto:team@civilizationx.co.uk">team@civilizationx.co.uk</a>.</p>
         <p>The Dataroom for each startup is available upon request - please indicate in the 'Additional Notes' section of the interest form if you are interested in viewing it.</p>
       </div>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        gap: '2rem',
-        marginTop: '2rem',
-      }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '2rem',
+          marginTop: '2rem',
+        }}
+      >
         {startups.map((startup) => (
           <div
             key={startup.id}
             style={{
-              border: '1px solid #2a3b4c',
+              border: '1px solid #4476a1',
               padding: '1rem',
               borderRadius: '12px',
-              backgroundColor: 'rgba(0, 0, 0, 0.25)',
-              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-              color: '#ffffff'
+              backgroundColor: 'rgba(255, 255, 255, 0.05)',
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
+              color: '#ffffff',
+              textAlign: 'left',
             }}
           >
-            <h2 style={{ fontSize: '1.25rem', marginBottom: '0.75rem' }}>{startup.name}</h2>
+            <h2 style={{ fontSize: '1.25rem', marginBottom: '0.75rem', color: '#ffffff' }}>{startup.name}</h2>
 
             {startup.description && (
-              <p style={{ marginBottom: '0.75rem', fontSize: '0.95rem' }}>
+              <p style={{ marginBottom: '0.75rem', color: '#f0f0f0', fontSize: '0.95rem' }}>
                 {startup.description}
               </p>
             )}
@@ -121,10 +125,11 @@ function App() {
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.75rem' }}>
                 {startup.sector.map((tag, index) => (
                   <span key={index} style={{
-                    backgroundColor: '#ffffff22',
+                    backgroundColor: '#336699',
                     padding: '0.3rem 0.6rem',
                     borderRadius: '999px',
                     fontSize: '0.8rem',
+                    color: '#ffffff',
                   }}>
                     {tag}
                   </span>
@@ -132,10 +137,10 @@ function App() {
               </div>
             )}
             {startup.pitchDeck && (
-              <div><a href={startup.pitchDeck} target="_blank" rel="noopener noreferrer" style={{ color: '#aad8ff' }}>📄 Pitch Deck</a></div>
+              <div><a href={startup.pitchDeck} target="_blank" rel="noopener noreferrer" style={{ color: '#a3d9ff' }}>📄 Pitch Deck</a></div>
             )}
             {startup.investmentMemo && (
-              <div><a href={startup.investmentMemo} target="_blank" rel="noopener noreferrer" style={{ color: '#aad8ff' }}>📝 Investment Memo</a></div>
+              <div><a href={startup.investmentMemo} target="_blank" rel="noopener noreferrer" style={{ color: '#a3d9ff' }}>📝 Investment Memo</a></div>
             )}
 
             <button
@@ -145,8 +150,9 @@ function App() {
                 padding: '0.5rem 1rem',
                 border: 'none',
                 borderRadius: '6px',
-                backgroundColor: '#aad8ff',
+                backgroundColor: '#99ccff',
                 color: '#000',
+                fontWeight: 'bold',
                 cursor: 'pointer',
               }}
             >
@@ -168,7 +174,4 @@ function App() {
 }
 
 export default App;
-
-
-
 
