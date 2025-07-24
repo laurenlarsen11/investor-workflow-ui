@@ -75,7 +75,7 @@ function App() {
       color: '#ffffff',
       fontFamily: 'system-ui, Avenir, Helvetica, Arial, sans-serif'
     }}>
-      <h1 style={{ textAlign: 'center' }}>Startup Interest Form</h1>
+      <h1 style={{ textAlign: 'center', color: '#ffffff' }}>Startup Interest Form</h1>
       <p style={{ textAlign: 'center' }}>Select a startup to view its materials and express interest.</p>
 
       <div style={{
